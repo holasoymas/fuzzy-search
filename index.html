@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="index.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Edit distance</title>
+</head>
+<body>
+    <header>
+        <h1 id="header">Fuzzy Search (Edit distance)</h1>
+    </header>
+    
+    <div class="search">
+        <input type="search" name="search" placeholder="Search string..." id="search">
+    </div>
+    
+    <div class="container">
+        <!-- LEFT PANEL: Master Word List -->
+        <div class="left">
+            <h2>Words to search</h2>
+            <div class="tags scrollable-zone">
+                <span class="tag">abcdef</span>
+                <span class="tag">azced</span>
+                <span class="tag">banana</span>
+                <span class="tag">apple</span>
+                <span class="tag">grape</span>
+            </div>
+            <div id="add-words">
+                <input type="text" placeholder="Add words">
+                <button>Add</button>
+            </div>
+        </div>
+
+        <!-- MIDDLE PANEL: Live Matches Container -->
+        <div class="middle">
+            <h2>Best Matches</h2>
+            <div class="matches-list scrollable-zone">
+                <!-- Data populated dynamically via JS -->
+                <div class="match-row">
+                    <span class="word">abcdef</span>
+                    <span class="badge">Dist: 0</span>
+                </div>
+                <div class="match-row">
+                    <span class="word">azced</span>
+                    <span class="badge warning">Dist: 3</span>
+                </div>
+                <div class="match-row">
+                    <span class="word">apple</span>
+                    <span class="badge error">Dist: 5</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: Horizontal Transformation Process Visualizer -->
+        <div class="right">
+            <h2>Process</h2>
+            <div class="process-list scrollable-zone">
+                <!-- Example Block: abcdef -> azced -->
+                <div class="process-card">
+                    <div class="process-meta">Target: <strong>azced</strong></div>
+                    <div class="horizontal-steps">
+                        <span class="step-node match">a &rarr; a</span>
+                        <span class="step-node rep">b &rarr; z <small>(rep)</small></span>
+                        <span class="step-node match">c &rarr; c</span>
+                        <span class="step-node del">d &rarr; &empty; <small>(del)</small></span>
+                        <span class="step-node match">e &rarr; e</span>
+                        <span class="step-node rep">f &rarr; d <small>(rep)</small></span>
+                    </div>
+                </div>
+
+                <!-- Example Block 2: apple -> grape -->
+                <div class="process-card">
+                    <div class="process-meta">Target: <strong>grape</strong></div>
+                    <div class="horizontal-steps">
+                        <span class="step-node ins">&empty; &rarr; g <small>(ins)</small></span>
+                        <span class="step-node rep">a &rarr; r <small>(rep)</small></span>
+                        <span class="step-node rep">p &rarr; a <small>(rep)</small></span>
+                        <span class="step-node match">p &rarr; p</span>
+                        <span class="step-node match">l &rarr; e</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
