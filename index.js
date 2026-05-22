@@ -2,51 +2,69 @@ import { returnMatched } from "./demo.js";
 import { getWordsToSearch } from "./initData.js";
 
 // search bar
-const searhBar = document.querySelector('#search');
+const searhBar = document.querySelector("#search");
 
 // add input field
-const wordsDiv = document.querySelector('#add-words input');
+const wordsDiv = document.querySelector("#add-words input");
 
 // add input field btn
-const addWordsBtn = document.querySelector('#add-words button');
+const addWordsBtn = document.querySelector("#add-words button");
 
 // tags
-const tagContainer = document.querySelector('.tags');
+const tagContainer = document.querySelector(".tags");
 
-addWordsBtn.addEventListener('click', ()=>{
-    console.log("you clicked btn");
+// click add btn
+addWordsBtn.addEventListener("click", () => {
+  console.log("you clicked btn");
 
-    const newWord = wordsDiv.value.trim();
+  const newWord = wordsDiv.value.trim();
 
-    if(newWord === ""){
-        alert("Plz insert a word");
-        return;
-    }
+  if (newWord === "") {
+    alert("Plz insert a word");
+    return;
+  }
 
-    const newTag = document.createElement('span');
-    newTag.className = 'tag';
-    newTag.textContent = newWord;
-    tagContainer.prepend(newTag);
+  const newTag = document.createElement("span");
+  newTag.className = "tag";
+  newTag.textContent = newWord;
+  tagContainer.prepend(newTag);
 
-    wordsDiv.value = "";
+  wordsDiv.value = "";
 
-    wordsDiv.focus();
-
+  wordsDiv.focus();
 });
 
+function renderMatches(container, matches) {
+  const matchesList = document.querySelector(container);
 
-searhBar.addEventListener('input', (e)=>{
+  matchesList.innerHTML = ""; // Clear previous results
 
-    const arr = getWordsToSearch();
+  matches.forEach((match) => {
+    const row = document.createElement("div");
+    row.className = "match-row";
 
-    const val = e.target.value;
+    const wordSpan = document.createElement("span");
+    wordSpan.className = "word";
+    wordSpan.textContent = match;
 
-    console.log("your val = " + val);
+    const badgeSpan = document.createElement("span");
+    badgeSpan.className = "badge";
+    badgeSpan.className = "Dist : ";
 
-    const vals = returnMatched(arr, 3, val);
+    row.appendChild(wordSpan);
+    row.appendChild(badgeSpan);
 
-    console.log(vals);
+    matchesList.appendChild(row);
+  });
+}
+
+searhBar.addEventListener("input", (e) => {
+  const arr = getWordsToSearch();
+
+  const val = e.target.value;
+
+  const matches = returnMatched(arr, 3, val);
+  console.log(matches);
+
+  renderMatches(".matches-list", matches);
 });
-
-
-
