@@ -11,7 +11,6 @@ body {
   color: #111;
 }
 
-/* Header Adjustments */
 #header {
   padding: 1.5rem;
   font-size: 1.25rem;
@@ -57,7 +56,6 @@ body {
   margin: 0 auto;
 }
 
-/* Base structural setups for all three column blocks */
 .container .left,
 .container .middle,
 .container .right {
@@ -71,7 +69,6 @@ body {
   flex-direction: column;
 }
 
-/* Headings internal to boxes */
 .container h2 {
   font-size: 0.85rem;
   text-transform: uppercase;
@@ -169,33 +166,4 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.match-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  border-bottom: 1px solid #f7fafc;
-  font-family: monospace;
-  font-size: 0.95rem;
-}
-
-.badge {
-  font-family: sans-serif;
-  font-size: 0.75rem;
-  background: #f0fff4;
-  color: #22543d;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
-.badge.warning {
-  background: #fffaf0;
-  color: #744210;
-}
-
-.badge.error {
-  background: #fff5f5;
-  color: #742a2a;
 }
